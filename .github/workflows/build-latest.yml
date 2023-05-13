@@ -29,9 +29,14 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          tox -e docker -- --tag=quay.io/ansible/awx-ee:latest
+          tox -e docker -- --tag=ghcr.io/ahmadsalimi/awx-ee:latest
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push images
-        run: |
-         echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io -u ${{ secrets.QUAY_USERNAME }} --password-stdin
-         docker push quay.io/ansible/awx-ee:latest
+        run: docker push ghcr.io/ahmadsalimi/awx-ee:latest
