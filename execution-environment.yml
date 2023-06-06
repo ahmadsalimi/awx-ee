@@ -24,6 +24,14 @@ dependencies:
       - name: ansible.posix
       - name: ansible.windows
       - name: redhatinsights.insights
+      - name: prometheus.prometheus
+      - name: community.general
+      - name: community.docker
+    roles:
+      - name: geerlingguy.docker
+      - name: darkwizard242.speedtest
+      - src: https://github.com/metno/ansible-role-dns
+      - src: https://github.com/arimanius/ansible-role-bind9
   system: |
     git-core [platform:rpm]
     python3.9-devel [platform:rpm compile]
